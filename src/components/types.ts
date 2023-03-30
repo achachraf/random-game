@@ -6,5 +6,6 @@ export type Clickable = {
 
 export type Score = {
     clicks: number,
-    colors: number
+    colors: number,
+    frozen: number,
 }
