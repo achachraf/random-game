@@ -7,6 +7,7 @@ import Header from "./Header";
 import Results from "./Results";
 import ClickablesServiceImpl from "@/services/ClickablesServiceImpl";
 import ClickablesService from "@/services/ClickablesService";
+// import styles from "../styles/Home.module.css";
 
 const MainPage = () => {
 
@@ -26,7 +27,7 @@ const MainPage = () => {
 
     const [highScore, setHighScore] = useState<number>(0);
 
-    const [scoreValue, setScoreValue] = useState<number>(ClickablesServiceImpl.INITIAL_SCORE);
+    const [scoreValue, setScoreValue] = useState<number>(0);
 
     const [clicks, setClicks] = useState(0);
 
@@ -46,6 +47,7 @@ const MainPage = () => {
         if(colors.length > 0) {
             setClickables(clickableService.getRandomInitialClickables(colors));
             setMoveFunction(()=>clickableService.getMoveFunction(colors.length));
+            setScoreValue(ClickablesServiceImpl.INITIAL_SCORE+30*(numberOfColors-2));
         }
     }, [colors]);
 
@@ -67,24 +69,28 @@ const MainPage = () => {
         }
     }, [scoreValue]);
 
-    const handleNumberChange = (e: any) => {
-        const number = e.target.value;
-        setNumberOfColors(number);
+
+    const submitNumberOfColors = () => {
+        if(numberOfColors != undefined && numberOfColors > 1 && numberOfColors < 11){
+            setColors(clickableService.getRandomColors(numberOfColors));
+        }
+        else{
+            alert("Please enter a number between 2 and 10");
+        }
     }
+
 
     const handleSubmit = (e: any) => {
         if (e.key === "Enter") {
-            let count = parseInt(e.target.value);
-            if(count != undefined && count > 1 && count < 11){
-                setColors(clickableService.getRandomColors(numberOfColors));
-            }
-            else{
-                alert("Please enter a number between 2 and 10");
-            }
+            submitNumberOfColors();
         }
     }
 
     const handleClick = (clickable: Clickable) => {
+        if(clickable.isFrozen){
+            alert("You can't click on a frozen color");
+            return;
+        }
         if(isLongPress === false){
             setClicks(clicks + 1);
             setClickables(clickables.map(c => {
@@ -147,7 +153,7 @@ const MainPage = () => {
                     src={bg}
                     layout="fill"
                     objectFit="cover"
-                    quality={100}
+                    priority
                     style={styles.imageStyle}
                     
                 />
@@ -157,8 +163,11 @@ const MainPage = () => {
                     highScore={highScore}
                     score={{clicks: clicks, colors: numberOfColors, frozen: frozenNumber}}
                     scoreValue={scoreValue}
-                    handleNumberChange={handleNumberChange}
+                    numberOfColors={numberOfColors}
+                    setNumberOfColors={setNumberOfColors}
                     handleSubmit={handleSubmit}
+                    gameEnded={gameEnded}
+                    submitNumberOfColors={submitNumberOfColors}
                 />
                
                 {/* HTML code to have 4 button the 4 corners of the page */}
@@ -190,6 +199,7 @@ const styles = {
         width: "100%",
         height: "100%",
         zIndex: -1,
+        backgroundRepeat: "repeat",
     },
 }
 

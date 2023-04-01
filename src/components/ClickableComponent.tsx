@@ -1,4 +1,5 @@
 import { Clickable } from "./types";
+import styles from "../styles/Game.module.css";
 
 const ClickableComponent = ({
         handleClick,
@@ -22,25 +23,18 @@ const ClickableComponent = ({
     }
 
     return (
-        <button
+        <div
             onClick={() => handleClick(clickable)}
             onTouchStart={() => handleOnTouchStart(clickable)}
             onTouchEnd={handleOnTouchEnd}
             onMouseDown={() => handleOnTouchStart(clickable)}
             onMouseUp={handleOnTouchEnd}
-            style={{...styles.clickable, backgroundColor:clickable.color, opacity: getOpacity(clickable)}}
+            style={{backgroundColor:clickable.color, opacity: getOpacity(clickable)}}
+            className={styles.clickable}
         />
     );
 };
 
-const styles = {
-    clickable: {
-        cursor: "pointer",
-        padding: "30px",
-        borderRadius: "0.5rem",
-        border: "1px solid black",
-        margin: "0.5rem",
-    },
-}
+
 
 export default ClickableComponent;

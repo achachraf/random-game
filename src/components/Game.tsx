@@ -18,7 +18,7 @@ const Game = ({
 }) => {
 
     return(
-        <div className={classname("grid gap-16 content-between", styles.gameContainer)}>
+        <div className={classname("grid md:gap-16 lg:gap-8 content-between", styles.gameContainer)}>
             <div className="flex justify-between">
                 <div>
                     <ClickableComponent 

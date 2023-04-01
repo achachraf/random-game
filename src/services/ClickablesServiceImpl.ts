@@ -45,7 +45,7 @@ class ClickablesServiceImpl implements ClickablesService {
 
     computeScore = (score: Score): number => {
         console.log("score is : ", score);
-        return ClickablesServiceImpl.INITIAL_SCORE - (score.clicks + (8-score.colors)*score.frozen);
+        return (ClickablesServiceImpl.INITIAL_SCORE+30*(score.colors-2)) - ((11-score.colors)*score.clicks + (8-score.colors)*score.frozen);
     }
  
 }
