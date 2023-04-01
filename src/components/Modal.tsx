@@ -22,7 +22,7 @@ export default function Modal({ setOpenModal } : {setOpenModal: (open:boolean) =
                                 <p className="mt-2 text-[15px] leading-relaxed text-gray-500">
                                     <ul>
                                         <li> - Make the minimum number of clicks to get all the colors the same.</li>
-                                        <li> - Click on a color to change the color of all the other cells.</li>
+                                        <li> - Click on a cell to change the color of all the other cells and keep the clicked color.</li>
                                         <li> - Long press on a color to freeze it.</li>
                                         <li> - If you freeze a color, it will not change from other cells</li>
                                         <li> - You can change the number of colors at any time, but the current round is lost.</li>
