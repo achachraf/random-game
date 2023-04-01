@@ -22,15 +22,16 @@ export default function Modal({ setOpenModal } : {setOpenModal: (open:boolean) =
                                 <p className="mt-2 text-[15px] leading-relaxed text-gray-500">
                                     <ul>
                                         <li> - Make the minimum number of clicks to get all the colors the same.</li>
-                                        <li> - Click on a color to change the color of all other cells.</li>
+                                        <li> - Click on a color to change the color of all the other cells.</li>
                                         <li> - Long press on a color to freeze it.</li>
                                         <li> - If you freeze a color, it will not change from other cells</li>
                                         <li> - You can change the number of colors at any time, but the current round is lost.</li>
-                                        <li> - The score is calculated based on the number of colors, frozen operations and clicks.</li>
+                                        <li> - The score is calculated based on the number of colors, freezing operations and clicks.</li>
                                         <li> - The more colors you have, the more points you get. (the less point you lose)</li>
-                                        <li> - The more freezin operations you use, the less points you get. (the less more you lose)</li>
+                                        <li> - The more freezing operations you use, the less points you get. (the more points you lose)</li>
                                         <li> - The value of freezing & click operations changes based on number of colors</li>
                                         <li> - The explicit formula of computing the score is hidden ^^</li>
+                                        <li>*** GOOD LUCK ***</li>
                                     </ul>
                                 </p>
                                 <div className="items-center gap-2 mt-3 sm:flex">
