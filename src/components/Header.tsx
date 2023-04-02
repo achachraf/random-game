@@ -22,7 +22,7 @@ const Header = (
             return;
         }
         setNumberOfColors(numberOfColors+1);
-        submitNumberOfColors()
+
     }
 
     const handleRemoveColor = () => {
@@ -31,7 +31,7 @@ const Header = (
             return;
         }
         setNumberOfColors(numberOfColors-1);
-        submitNumberOfColors()
+
     }
 
     return (

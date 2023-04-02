@@ -15,20 +15,21 @@ class ClickablesServiceImpl implements ClickablesService {
                 isFrozen: false
             });
         }
-        if(clickables.every(clickable => clickable.color === clickables[0].color)){
+        let max = Math.min(colors.length, 5);
+        if(new Set(clickables.map(clickable => clickable.color)).size != max){
             return this.getRandomInitialClickables(colors);
         }
+
+        
         return clickables;
     }
 
-    getRandomColors = (numberOfColors:number): string[] => {
-        const randomColors: string[] = [];
-        for (let i = 0; i < numberOfColors; i++) {
-            randomColors.push(allColors[Math.floor(Math.random() * allColors.length)]);
+    getRandomColors = (numberOfColors:number): Set<string> => {
+        const randomColors: Set<string> = new Set();
+        while(randomColors.size < numberOfColors){
+            randomColors.add(allColors[Math.floor(Math.random() * allColors.length)]);
         }
-        if(randomColors.every(color => color === randomColors[0])){
-            return this.getRandomColors(numberOfColors);
-        }
+        
         return randomColors;
     }
 
@@ -39,12 +40,10 @@ class ClickablesServiceImpl implements ClickablesService {
         }
         while (a%length === 0);
         const moveFunction = (x: number) => (a + x);
-        console.log("a is : ", a);
         return moveFunction;
     }
 
     computeScore = (score: Score): number => {
-        console.log("score is : ", score);
         return (ClickablesServiceImpl.INITIAL_SCORE+30*(score.colors-2)) - ((11-score.colors)*score.clicks + (8-score.colors)*score.frozen);
     }
  

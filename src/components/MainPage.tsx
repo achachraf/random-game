@@ -35,13 +35,25 @@ const MainPage = () => {
 
     const clickableService:ClickablesService = new ClickablesServiceImpl();
 
+    //convert set to array
+    function setToArray(set: Set<string>) {
+        const array: string[] = [];
+        set.forEach((c) => array.push(c));
+        return array;
+    }
+
 
     useEffect(() => {
-        setColors(clickableService.getRandomColors(numberOfColors));
+        setColors(setToArray(clickableService.getRandomColors(numberOfColors)));
         if(localStorage.getItem("highScore") !== null) {
             setHighScore(parseInt(localStorage.getItem("highScore") as string));
         }
     }, []);
+
+    useEffect(() => {
+        submitNumberOfColors();
+    }, [numberOfColors]);
+
 
     useEffect(() => {
         if(colors.length > 0) {
@@ -72,7 +84,7 @@ const MainPage = () => {
 
     const submitNumberOfColors = () => {
         if(numberOfColors != undefined && numberOfColors > 1 && numberOfColors < 11){
-            setColors(clickableService.getRandomColors(numberOfColors));
+            setColors(setToArray(clickableService.getRandomColors(numberOfColors)));
         }
         else{
             alert("Please enter a number between 2 and 10");
@@ -118,7 +130,7 @@ const MainPage = () => {
         setClicks(0);
         setFrozenNumber(0);
         setScoreValue(ClickablesServiceImpl.INITIAL_SCORE)
-        setColors(clickableService.getRandomColors(numberOfColors));
+        setColors(setToArray(clickableService.getRandomColors(numberOfColors)));
         setGameEnded(false);
         
     }
