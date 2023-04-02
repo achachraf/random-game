@@ -144,6 +144,9 @@ const MainPage = () => {
             }
             setClickables(clickables.map(c => {
                 if (clickable.id === c.id) {
+                    if(!c.isFrozen){
+                        setFrozenNumber(frozenNumber + 1);
+                    }
                     return {
                         ...c,
                         isFrozen: !c.isFrozen,
@@ -152,7 +155,6 @@ const MainPage = () => {
                 return c;
             }));
             setIsLongPress(true);
-            setFrozenNumber(frozenNumber + 1);
         }, 700));
     }
 
